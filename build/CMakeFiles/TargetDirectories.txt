@@ -1,0 +1,3 @@
+/Users/olegchernov/Desktop/Projects/sshConnect/build/CMakeFiles/sshConnect.dir
+/Users/olegchernov/Desktop/Projects/sshConnect/build/CMakeFiles/edit_cache.dir
+/Users/olegchernov/Desktop/Projects/sshConnect/build/CMakeFiles/rebuild_cache.dir

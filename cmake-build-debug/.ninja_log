@@ -1,0 +1,8 @@
+# ninja log v5
+432	475	1702586827467761300	sshConnect	6c5f710531b86645
+4	833	1702586405924375141	CMakeFiles/sshConnect.dir/User.cpp.o	361ca9e84103c120
+6	544	1702549418966660589	CMakeFiles/sshConnect.dir/main.cpp.o	e8a0f4fa0ee5ce46
+5	56	1702625028270085959	build.ninja	7af7b29ebf5d0df3
+5	432	1702586827422666105	CMakeFiles/sshConnect.dir/sshConnect.cpp.o	ba18b511eacf63d7
+12	451	1702625151587343984	CMakeFiles/sshConnect.dir/sshConnect.cpp.o	ba18b511eacf63d7
+451	495	1702625151634639427	sshConnect	6c5f710531b86645
