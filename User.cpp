@@ -1,4 +1,3 @@
-#pragma once
 #include "User.h"
 #include <nlohmann/json.hpp>
 #include<fstream>
