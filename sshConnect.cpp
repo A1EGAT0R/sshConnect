@@ -1,9 +1,18 @@
 #include "User.h"
 
-#include<stdlib.h>
+#include <stdlib.h>
 #include <iostream>
+#include <array>
 
-std::unique_ptr<User> adder()
+namespace commands
+{
+    const std::string ADD = "#add";
+    const std::string CONTINUE = "#go";
+    const std::string REMOVE = "#del";
+    const std::string LIST = "#list";
+}
+
+void adder()
 {
     std::string serializedName;
 
@@ -33,10 +42,28 @@ std::unique_ptr<User> adder()
                                            username,
                                            serverIp,
                                            port
-    ));
+                                           ));
 
     conf::serializeUser(ret.get());
-    return ret;
+}
+
+void jsonFormatedPrint(const std::string& fromJsonString)
+{
+    for (auto ch : fromJsonString) {
+        std::cout << ch;
+        if(ch == '}')
+            std::cout << '\n';
+    }
+}
+
+void eraser()
+{
+    std::string target;
+
+    std::cout << "Enter the username: ";
+    std::cin >> target;
+
+    json_op::erase(target);
 }
 
 int main()
@@ -48,17 +75,27 @@ int main()
 
     while(!isCorrectUser) {
         do {
-            std::cout << "Select.\n"
-                         "Create a new user(#add) \n"
-                         "or connect using an existing one(#continue): ";
+            std::cout << "Select.\n" <<
+                         "See user list(" << commands::LIST << ")\n" <<
+                         "Create a new user(" << commands::ADD << ")\n" <<
+                         "Delete user(" << commands::REMOVE <<")\n" <<
+                         "or connect using an existing one("<<commands::CONTINUE<<"): ";
 
             std::cin >> input;
-            if (input == "#add")
+            if (input == commands::ADD)
                 adder();
-            else if(input!="#continue")
+            else if (input == commands::LIST)
+            {
+                std::cout<<"\n\n";
+                jsonFormatedPrint(to_string((GET_MAIN_JSON)));
+                std::cout<<"\n\n";
+            }
+            else if(input == commands::REMOVE)
+                eraser();
+            else if(input!=commands::CONTINUE)
                 std::cout << "\nWrong input!\n\n";
 
-        } while (input != "#continue");
+        } while (input != commands::CONTINUE);
 
         std::cout << "Enter username: ";
         std::cin >> us;

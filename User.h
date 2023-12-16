@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <memory>
+#include "json_operation.h"
 
 class User {
 private:
@@ -18,7 +19,7 @@ public:
             serverIp(""),
             port(22)
             {}
-    User(std::string, std::string, std::string, std::string, unsigned short port = 22);
+    User(const std::string&, const std::string&, const std::string&, const std::string&, unsigned short port = 22);
     User(User&);
     User(User&&);
 
@@ -31,10 +32,10 @@ public:
 
 
 namespace conf {
-    const inline std::string serializedPath = "Srl.json";
 
     bool isCorrectUser(User*);
 
-    std::unique_ptr<User> readUser(std::string);
+    std::unique_ptr<User> readUser(const std::string&);
     void serializeUser(User*);
+
 }

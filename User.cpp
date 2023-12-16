@@ -1,10 +1,7 @@
 #include "User.h"
-#include <nlohmann/json.hpp>
-#include<fstream>
-
+#include<vector>
 
 using namespace nlohmann;
-
 
 User::User(User&& us)
 {
@@ -23,7 +20,7 @@ User::User(User& us)
     port = us.getPort();
 }
 
-User::User(std::string serName, std::string keyPath, std::string usName, std::string servIp, unsigned short port):
+User::User(const std::string& serName, const std::string& keyPath, const std::string& usName, const std::string& servIp, unsigned short port):
 serializedName(serName),
 keyPath(keyPath),
 username(usName),
@@ -50,14 +47,7 @@ void
 conf::serializeUser(User* user)
 {
     json runtimeJson;
-    json inFileJson;
-
-    std::ifstream ist(conf::serializedPath);
-    if(ist)
-        ist>>inFileJson;
-    ist.close();
-
-    std::ofstream ost(conf::serializedPath);
+    json inFileJson = GET_MAIN_JSON;
 
     runtimeJson["KeyPath"] = user->getKeyPath();
     runtimeJson["UserName"] = user->getUserName();
@@ -65,18 +55,13 @@ conf::serializeUser(User* user)
     runtimeJson["Port"] = user->getPort();
 
     inFileJson[user->getSerializedName()] = runtimeJson;
-    ost << inFileJson;
-    ost.close();
+    json_op::serializedJson(inFileJson);
 }
 
 std::unique_ptr<User>
-conf::readUser(std::string serializedName)
+conf::readUser(const std::string& serializedName)
 {
-    json read;
-
-    std::ifstream ist(conf::serializedPath);
-    ist >> read;
-    ist.close();
+    json read = GET_MAIN_JSON;
 
     json retValues = read[serializedName];
 

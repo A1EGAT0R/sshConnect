@@ -10,4 +10,6 @@ add_executable(sshConnect
         User.cpp
         User.h
         sshConnect.cpp
+        json_operation.cpp
+        json_operation.h
 )
