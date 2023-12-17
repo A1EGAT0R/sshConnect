@@ -24,10 +24,10 @@ public:
     User(User&&);
 
     std::string getSerializedName() {return serializedName;}
-    std::string getKeyPath() { return keyPath; }
-    std::string getUserName() { return username; }
-    std::string getServerIp() { return serverIp; }
-    unsigned short getPort() { return port; }
+    std::string getKeyPath() const noexcept { return keyPath; }
+    std::string getUserName() const noexcept { return username; }
+    std::string getServerIp() const noexcept { return serverIp; }
+    unsigned short getPort() const noexcept { return port; }
 };
 
 
