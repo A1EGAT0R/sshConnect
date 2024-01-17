@@ -12,6 +12,12 @@ namespace commands
     const std::string LIST = "#list";
 }
 
+void
+clear_win()
+{
+    std::cout << "\033[0d\033[2J";
+}
+
 void adder()
 {
     std::string serializedName;
@@ -52,7 +58,7 @@ void jsonFormatedPrint(const std::string& fromJsonString)
     for (auto ch : fromJsonString) {
         std::cout << ch;
         if(ch == '}')
-            std::cout << '\n';
+            std::cout << "\n\n";
     }
 }
 
@@ -60,8 +66,10 @@ void eraser()
 {
     std::string target;
 
+    std::cout<<"\n\n";
     std::cout << "Enter the username: ";
     std::cin >> target;
+    std::cout<<"\n\n";
 
     json_op::erase(target);
 }
@@ -82,18 +90,19 @@ int main()
                          "or connect using an existing one("<<commands::CONTINUE<<"): ";
 
             std::cin >> input;
+            clear_win();
             if (input == commands::ADD)
                 adder();
             else if (input == commands::LIST)
             {
                 std::cout<<"\n\n";
                 jsonFormatedPrint(to_string((GET_MAIN_JSON)));
-                std::cout<<"\n\n";
+                std::cout<<"\n";
             }
             else if(input == commands::REMOVE)
                 eraser();
             else if(input!=commands::CONTINUE)
-                std::cout << "\nWrong input!\n\n";
+                std::cout << "\n\nWrong input!\n\n";
 
         } while (input != commands::CONTINUE);
 
