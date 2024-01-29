@@ -10,6 +10,7 @@ namespace commands
     const std::string CONTINUE = "#go";
     const std::string REMOVE = "#del";
     const std::string LIST = "#list";
+    const std::string END = "#end";
 }
 
 void
@@ -84,23 +85,30 @@ int main()
     while(!isCorrectUser) {
         do {
             std::cout << "Select.\n" <<
-                         "See user list(" << commands::LIST << ")\n" <<
-                         "Create a new user(" << commands::ADD << ")\n" <<
-                         "Delete user(" << commands::REMOVE <<")\n" <<
-                         "or connect using an existing one("<<commands::CONTINUE<<"): ";
+                      "End program(" << commands::END << ")\n" <<
+                      "See user list(" << commands::LIST << ")\n" <<
+                      "Create a new user(" << commands::ADD << ")\n" <<
+                      "Delete user(" << commands::REMOVE << ")\n" <<
+                      "or connect using an existing one(" << commands::CONTINUE << "): ";
 
             std::cin >> input;
             clear_win();
-            if (input == commands::ADD)
+            if (input == commands::ADD) {
                 adder();
-            else if (input == commands::LIST)
-            {
-                std::cout<<"\n\n";
+            }
+            else if (input == commands::LIST) {
+                std::cout << "\n\n";
+                jsonFormatedPrint(to_string((GET_MAIN_JSON)));
+                std::cout << "\n";
+            }
+            else if (input == commands::REMOVE) {
                 jsonFormatedPrint(to_string((GET_MAIN_JSON)));
                 std::cout<<"\n";
-            }
-            else if(input == commands::REMOVE)
                 eraser();
+            }
+            else if (input ==commands::END) {
+                return 0;
+            }
             else if(input!=commands::CONTINUE)
                 std::cout << "\n\nWrong input!\n\n";
 
