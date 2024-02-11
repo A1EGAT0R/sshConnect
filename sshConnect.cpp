@@ -54,12 +54,10 @@ void adder()
     conf::serializeUser(ret.get());
 }
 
-void jsonFormatedPrint(const std::string& fromJsonString)
+void jsonFormatedPrint(const nlohmann::json& fromJson)
 {
-    for (auto ch : fromJsonString) {
-        std::cout << ch;
-        if(ch == '}')
-            std::cout << "\n\n";
+    for (auto ch : fromJson) {
+        std::cout << ch["SerializedName"] << ":\n\t" << ch["KeyPath"]<<' '<< ch["UserName"]<<' '<< ch["ServerIp"]<<' '<< ch["Port"] << "\n\n";
     }
 }
 
@@ -98,12 +96,12 @@ int main()
             }
             else if (input == commands::LIST) {
                 std::cout << "\n\n";
-                jsonFormatedPrint(to_string((GET_MAIN_JSON)));
-                std::cout << "\n";
+                jsonFormatedPrint(GET_MAIN_JSON);
+                std::cout << "\n\n";
             }
             else if (input == commands::REMOVE) {
-                jsonFormatedPrint(to_string((GET_MAIN_JSON)));
-                std::cout<<"\n";
+                jsonFormatedPrint(GET_MAIN_JSON);
+                std::cout<<"\n\n";
                 eraser();
             }
             else if (input ==commands::END) {

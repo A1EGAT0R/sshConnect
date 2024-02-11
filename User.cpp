@@ -49,6 +49,7 @@ conf::serializeUser(User* user)
     json runtimeJson;
     json inFileJson = GET_MAIN_JSON;
 
+    runtimeJson["SerializedName"] = user->getSerializedName();
     runtimeJson["KeyPath"] = user->getKeyPath();
     runtimeJson["UserName"] = user->getUserName();
     runtimeJson["ServerIp"] = user->getServerIp();
